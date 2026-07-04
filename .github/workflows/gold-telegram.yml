@@ -1,0 +1,25 @@
+name: Daily Gold Rate to Telegram
+
+on:
+  schedule:
+    # 08:45 Cambodia time (Asia/Phnom_Penh = UTC+7)  ->  01:45 UTC
+    # Note: GitHub's scheduler can run a few minutes late during busy periods.
+    - cron: "45 1 * * *"
+  workflow_dispatch: {}   # lets you press "Run workflow" to test manually
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Post gold rate to Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python scripts/post_gold.py
