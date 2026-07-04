@@ -62,8 +62,7 @@ def main():
     text = (
         f"Gold Rate Update — {today}\n"
         f"Gold Price: {gold_per_chi}/chi\n"
-        f"18K Price: {k18:.2f}/chi\n"
-        f"Updated in KE App ✅"
+        f"18K Price: {k18:.2f}/chi"
     )
 
     params = {"chat_id": CHAT_ID, "message_thread_id": THREAD_ID, "text": text}
